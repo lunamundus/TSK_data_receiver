@@ -23,22 +23,22 @@ class SerialPortSettingDialog(QDialog):
         port_layout.addWidget(self.port_combobox)
         
         # bit rate setup
-        self.bps_label = QLabel('Bit Rate(bps)')
-        self.bps_combobox = QComboBox()
-        self.bps_combobox.addItems(["2400", "4800", "9600", "19200", "38400"])
-        self.bps_combobox.setCurrentIndex(2)
-        bps_layout = QHBoxLayout()
-        bps_layout.addWidget(self.bps_label)
-        bps_layout.addWidget(self.bps_combobox)
+        self.baudrate_label = QLabel('Bit Rate(baudrate)')
+        self.baudrate_combobox = QComboBox()
+        self.baudrate_combobox.addItems(["2400", "4800", "9600", "19200", "38400"])
+        self.baudrate_combobox.setCurrentIndex(2)
+        baudrate_layout = QHBoxLayout()
+        baudrate_layout.addWidget(self.baudrate_label)
+        baudrate_layout.addWidget(self.baudrate_combobox)
         
         # data bits setup
-        self.databits_label = QLabel("Data Bits")
-        self.databits_combobox = QComboBox()
-        self.databits_combobox.addItems(["5", "6", "7", "8"])
-        self.databits_combobox.setCurrentIndex(3)
-        databits_layout = QHBoxLayout()
-        databits_layout.addWidget(self.databits_label)
-        databits_layout.addWidget(self.databits_combobox)
+        self.bytesize_label = QLabel("Data Bits")
+        self.bytesize_combobox = QComboBox()
+        self.bytesize_combobox.addItems(["5", "6", "7", "8"])
+        self.bytesize_combobox.setCurrentIndex(3)
+        bytesize_layout = QHBoxLayout()
+        bytesize_layout.addWidget(self.bytesize_label)
+        bytesize_layout.addWidget(self.bytesize_combobox)
         
         # parity bits setup
         self.parity_label = QLabel("Parity Bit")
@@ -71,8 +71,8 @@ class SerialPortSettingDialog(QDialog):
         
         # add layout to setting_layout 
         setting_layout.addLayout(port_layout)
-        setting_layout.addLayout(bps_layout)
-        setting_layout.addLayout(databits_layout)
+        setting_layout.addLayout(baudrate_layout)
+        setting_layout.addLayout(bytesize_layout)
         setting_layout.addLayout(parity_layout)
         setting_layout.addLayout(stopbits_layout)
         setting_layout.addLayout(btn_layout)
@@ -83,8 +83,8 @@ class SerialPortSettingDialog(QDialog):
     def get_settings(self):
         return {
             "port": self.port_combobox.currentText(),
-            "bps": self.bps_combobox.currentText(),
-            "databits": self.databits_combobox.currentText(),
+            "baudrate": self.baudrate_combobox.currentText(),
+            "bytesize": self.bytesize_combobox.currentText(),
             "parity": self.parity_combobox.currentText(),
             "stopbits": self.stopbits_combobox.currentText()
         }
