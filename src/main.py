@@ -1,12 +1,15 @@
 import sys
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QHBoxLayout, QTextEdit, QPushButton, QWidget
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QHBoxLayout, QTextEdit, QPushButton, QWidget, QDialog
+
+from serial_port_setting import SerialPortSettingDialog
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         
         self.setWindowTitle('TSK Data Viewer')
+        self.resize(800, 600)
         self.data_viewer()
         
     def data_viewer(self):
@@ -51,9 +54,16 @@ class MainWindow(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())
+    
+    serial_port_dialog = SerialPortSettingDialog()
+    if serial_port_dialog.exec() == QDialog.Accepted:
+        setting = serial_port_dialog.get_settings()
+        print(setting)
+        
+        # show main window
+        window = MainWindow()
+        window.show()
+        sys.exit(app.exec())
     
 if __name__ == '__main__':
     main()
